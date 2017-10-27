@@ -8,6 +8,30 @@ function randomError() {
   }
 }
 
+let welcome = new Promise((resolve, reject)=>{
+  err = randomError();
+  if (err) {
+    console.error('Oh no!', err); return;
+    }
+    return console.log('Welcome');
+});
+
+let to = new Promise((resolve, reject)=>{
+  err = randomError();  
+    if (err) {
+    console.error('Wut?', err); return;
+    }
+    return console.log(' to');
+});
+
+let paradise = new Promise((resolve, reject)=>{
+  err = randomError();    
+    if (err) {
+    console.error('Srsly?', err); return;
+    }
+    return console.log(' paradise \u2601 \u2601');
+});
+
 // TODO: write the three missing Promises and assign them to the variables
 // "welcome", "to", and "paradise"
 

@@ -7,8 +7,37 @@ function randomError() {
     return null;
   }
 }
+//welcome to callback heaven
+// function welcome(callback) {
+//   callback(null, 'Welcome');
+//   }
+//   function toParadise(err) {
+//   err = randomError();  
+//   if (err) {
+//   console.error('Wut?', err); return;
+//   }
+//   return ' to' + paradise();
+//   }
 
-// Welcome to callback hell
+//   function paradise(err) {
+//   err = randomError();    
+//   if (err) {
+//   console.error('Srsly?', err); return;
+//   }
+//   return ' paradise \u2601 \u2601';
+//   }
+
+//   welcome(function (err, res) {
+//   err = randomError();  
+//   if (err) {
+//   console.error('Oh no!', err); return;
+//   }
+
+//   var toPrint = toParadise();
+//   console.log(res + toPrint);
+//   });
+
+//Welcome to callback hell
 function welcome(callback) {
   callback(null, 'Welcome');
 }
