@@ -54,34 +54,6 @@ console.log(flatWordMap);
 // Use Array.reduce() to produce this final result:
 // { Hello: 4, world: 3, foo: 11, bar: 5 }
 
-// let weightedWordCount = flatWordMap.filter(function(item) {
-//     var arr = flatWordMap;
-//     return item[0] == ;
-// });
-//
-//
-// let final = weightedWordCount.reduce(function(a,b){
-//   return a + b[1];
-// }, 0);
-
-
-
-// let weightedWordCount = function(){
-//   for (var i = 0; i< flatWordMap.length; i++){
-//       flatWordMap.reduce(function(first, second){
-//
-//           if(first[0] != second[0])
-//           {
-//               return first[0];
-//           } else{
-//               var value = first[1] + second[1];
-//               return value;
-//
-//           }
-//
-//       },i );
-//   }
-// }();
 
 let weightedWordCount = flatWordMap.reduce(function(a,b){
     for ( var i=0; i< a.length; i++){
@@ -107,15 +79,6 @@ let weightedWordCount = flatWordMap.reduce(function(a,b){
     return o;
 }, {});
 
-
-
-
-
-
-  // var x = flatWordMap.filter(function(object){
-  //     return object[0] == item[0];
-  // })
-  // return x;
 
 // TODO
 
