@@ -40,15 +40,17 @@ let flatWordMap = wordMap.reduce((a,b) => a.concat(b));
 // Use Array.reduce() to produce this final result:
 // { Hello: 4, world: 3, foo: 11, bar: 5 }
 
-let weightedWordCount =  flatWordMap.reduce(function(result,data){
-  result.indexOf(data);
-  if (result.indexOf(data)<0){
-    result.push(data);
-  }else{
-    result.indexOf(data)[1] += data[1];
-  }
-});
+// let weightedWordCount =  flatWordMap.reduce(function(acc, cur, i) {
+//   // acc[i] = cur;
+//   return acc;
+// }, {});
 
-//funktioniert nicht, da indeOf nicht geht
+
+let weightedWordCount = flatWordMap.reduce((o, [ key, value ]) => { //DONE
+  if(o[key]=== undefined) o[key] = value;
+  else o[key] += value;
+  return o
+}, {})
+
 
 console.log(weightedWordCount);
