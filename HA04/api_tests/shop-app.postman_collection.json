@@ -1,0 +1,378 @@
+{
+	"info": {
+		"name": "shop-app",
+		"_postman_id": "fd9ee37a-4074-f144-6f31-7d7aa67c4294",
+		"description": "Exercise 4 for CSEM 2017",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST /owner",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"let jsonData = pm.response.json();",
+							"postman.setEnvironmentVariable(\"ownerId\", jsonData._id || jsonData.id);",
+							"",
+							"postman.setNextRequest(\"GET /owner/:id\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Alice\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4000/owner",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"owner"
+					]
+				},
+				"description": "Create a new owner."
+			},
+			"response": []
+		},
+		{
+			"name": "GET /owner/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response contains owner Alice\", () => {",
+							"    let owner = pm.response.json();",
+							"    pm.expect(owner.name).to.eql(\"Alice\");",
+							"});",
+							"",
+							"postman.setNextRequest(\"POST /shop\");"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"console.log(`ownerId is ${postman.getEnvironmentVariable(\"ownerId\")}`);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Alice\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4000/owner/{{ownerId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"owner",
+						"{{ownerId}}"
+					]
+				},
+				"description": "Get one owner"
+			},
+			"response": []
+		},
+		{
+			"name": "POST /shop",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"let jsonData = pm.response.json();",
+							"postman.setEnvironmentVariable(\"shopId\", jsonData._id || jsonData.id);",
+							"",
+							"postman.setNextRequest(\"GET /shop/:id\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"owner_id\" : \"{{ownerId}}\",\n\t\"name\" : \"Games 4 Cats Shop\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4000/shop",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"shop"
+					]
+				},
+				"description": "Create a new shop"
+			},
+			"response": []
+		},
+		{
+			"name": "GET /shop/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response contains newly created shop\", function () {",
+							"    var shop = pm.response.json();",
+							"    pm.expect(shop.name).to.eql(\"Games 4 Cats Shop\");",
+							"});",
+							"",
+							"postman.setNextRequest(\"POST /product\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Alice\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4000/shop/{{shopId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"shop",
+						"{{shopId}}"
+					]
+				},
+				"description": "Get one shop"
+			},
+			"response": []
+		},
+		{
+			"name": "POST /product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"let jsonData = pm.response.json();",
+							"postman.setEnvironmentVariable(\"productId\", jsonData._id || jsonData.id);",
+							"",
+							"postman.setNextRequest(\"GET /product/:id\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"shop_id\" : \"{{shopId}}\",\n\t\"name\" : \"Nyancat Racing 3D\",\n\t\"price\" : 3\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4000/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"product"
+					]
+				},
+				"description": "Create a new product"
+			},
+			"response": []
+		},
+		{
+			"name": "GET /product/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response contains newly created shop\", () => {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Nyancat Racing 3D\");",
+							"});",
+							"",
+							"postman.setNextRequest(\"GET /shop/:id/products\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"shop_id\" : 1,\n\t\"name\" : \"Nyancat Racing 3D\",\n\t\"price\" : 3\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4000/product/{{productId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"product",
+						"{{productId}}"
+					]
+				},
+				"description": "Get one product"
+			},
+			"response": []
+		},
+		{
+			"name": "GET /shop/:id/products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response contains one or more products\", () => {",
+							"    var products = pm.response.json().products || pm.response.json();",
+							"    pm.expect(products.length).to.be.above(0);",
+							"});",
+							"",
+							"postman.setNextRequest(\"GET /product\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Alice\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4000/shop/{{shopId}}/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"shop",
+						"{{shopId}}",
+						"products"
+					]
+				},
+				"description": "Get all products of one shop."
+			},
+			"response": []
+		},
+		{
+			"name": "GET /product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response contains one or more products\", () => {",
+							"    var products = pm.response.json().data;",
+							"    pm.expect(products.length).to.be.above(0);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"shop_id\" : 1,\n\t\"name\" : \"Nyancat Racing 3D\",\n\t\"price\" : 3\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4000/product/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"product",
+						""
+					]
+				},
+				"description": "Get all products"
+			},
+			"response": []
+		}
+	]
+}

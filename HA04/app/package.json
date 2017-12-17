@@ -1,0 +1,26 @@
+{
+  "name": "shop-app",
+  "version": "1.0.0",
+  "description": "Node.js app + DB on Docker",
+  "author": "Markus Klems",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "prod": "node src/app.js",
+    "start": "npm run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "continuation-local-storage": "^3.2.0",
+    "cors": "^2.8.1",
+    "express": "^4.13.3",
+    "pg": "^6.1.5",
+    "sequelize": "^3.30.4",
+    "mongodb": "^2.2.11",
+    "mongoose": "^4.6.8"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
